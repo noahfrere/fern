@@ -83,7 +83,7 @@ void FERNIntegrator::prepareKernel()
 }
 
 
-void FERNIntegrator::integrate(IntegrationData &integrationData)
+void FERNIntegrator::integrate(IntegrationData &integrationData, fern_real *X)
 {
 	// Set up stream
 	cudaStream_t stream;
@@ -100,6 +100,11 @@ void FERNIntegrator::integrate(IntegrationData &integrationData)
 	checkCudaErrors();
 	
 	Globals devGlobals;
+
+	for (int i = 0; i < numSpecies; i++) {
+		devGlobals.X[i] = X[i];
+	}
+
 	devGlobals.cudaAllocate(network);
 	
 	Globals *devGlobalsPtr;

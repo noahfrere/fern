@@ -26,7 +26,7 @@ public:
 	
 	/**	Launches a kernel to process the IntegrationData
 	*/
-	void integrate(IntegrationData &integrationData);
+	void integrate(IntegrationData &integrationData, fern_real *X);
 	static void checkCudaErrors();
 	
 	Network network;
